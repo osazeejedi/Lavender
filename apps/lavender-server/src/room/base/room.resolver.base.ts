@@ -31,6 +31,7 @@ import { Bet } from "../../bet/base/Bet";
 import { MessageFindManyArgs } from "../../message/base/MessageFindManyArgs";
 import { Message } from "../../message/base/Message";
 import { RoomCreationInput } from "../RoomCreationInput";
+import { RoomFeedbackInput } from "../../bet/RoomFeedbackInput";
 import { RoomService } from "../room.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Room)
@@ -183,5 +184,13 @@ export class RoomResolverBase {
     args: RoomCreationInput
   ): Promise<RoomCreationInput> {
     return this.service.AddRoom(args);
+  }
+
+  @graphql.Mutation(() => String)
+  async SubmitRoomFeedback(
+    @graphql.Args()
+    args: RoomFeedbackInput
+  ): Promise<string> {
+    return this.service.SubmitRoomFeedback(args);
   }
 }

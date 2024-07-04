@@ -16,7 +16,10 @@ import {
   Room as PrismaRoom,
   User as PrismaUser,
 } from "@prisma/client";
+import { BettingHistoryOutput } from "../BettingHistoryOutput";
+import { FinalLeaderboardOutput } from "../FinalLeaderboardOutput";
 import { PlaceBetInput } from "../PlaceBetInput";
+import { BetSettlementInput } from "../../user/BetSettlementInput";
 
 export class BetServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -56,7 +59,16 @@ export class BetServiceBase {
       })
       .user();
   }
+  async GetBettingHistory(args: string): Promise<BettingHistoryOutput> {
+    throw new Error("Not implemented");
+  }
+  async GetFinalLeaderboard(args: string): Promise<FinalLeaderboardOutput> {
+    throw new Error("Not implemented");
+  }
   async PlaceBet(args: PlaceBetInput): Promise<PlaceBetInput> {
+    throw new Error("Not implemented");
+  }
+  async SettleBets(args: BetSettlementInput): Promise<string> {
     throw new Error("Not implemented");
   }
 }

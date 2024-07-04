@@ -17,6 +17,7 @@ import {
   Message as PrismaMessage,
 } from "@prisma/client";
 import { RoomCreationInput } from "../RoomCreationInput";
+import { RoomFeedbackInput } from "../../bet/RoomFeedbackInput";
 
 export class RoomServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -63,6 +64,9 @@ export class RoomServiceBase {
       .messages(args);
   }
   async AddRoom(args: RoomCreationInput): Promise<RoomCreationInput> {
+    throw new Error("Not implemented");
+  }
+  async SubmitRoomFeedback(args: RoomFeedbackInput): Promise<string> {
     throw new Error("Not implemented");
   }
 }

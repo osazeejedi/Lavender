@@ -32,6 +32,7 @@ import { BetWhereUniqueInput } from "../../bet/base/BetWhereUniqueInput";
 import { MessageFindManyArgs } from "../../message/base/MessageFindManyArgs";
 import { Message } from "../../message/base/Message";
 import { MessageWhereUniqueInput } from "../../message/base/MessageWhereUniqueInput";
+import { RoomFeedbackInput } from "../../bet/RoomFeedbackInput";
 import { RoomCreationInput } from "../RoomCreationInput";
 
 @swagger.ApiBearerAuth()
@@ -430,8 +431,25 @@ export class RoomControllerBase {
   })
   async AddRoom(
     @common.Body()
-    body: RoomCreationInput
+    body: RoomFeedbackInput
   ): Promise<RoomCreationInput> {
     return this.service.AddRoom(body);
+  }
+
+  @common.Post("/rooms/feedback")
+  @swagger.ApiOkResponse({
+    type: String,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async SubmitRoomFeedback(
+    @common.Body()
+    body: RoomFeedbackInput
+  ): Promise<string> {
+    return this.service.SubmitRoomFeedback(body);
   }
 }

@@ -28,7 +28,10 @@ import { UpdateBetArgs } from "./UpdateBetArgs";
 import { DeleteBetArgs } from "./DeleteBetArgs";
 import { Room } from "../../room/base/Room";
 import { User } from "../../user/base/User";
+import { BettingHistoryOutput } from "../BettingHistoryOutput";
+import { FinalLeaderboardOutput } from "../FinalLeaderboardOutput";
 import { PlaceBetInput } from "../PlaceBetInput";
+import { BetSettlementInput } from "../../user/BetSettlementInput";
 import { BetService } from "../bet.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Bet)
@@ -201,11 +204,35 @@ export class BetResolverBase {
     return result;
   }
 
+  @graphql.Query(() => BettingHistoryOutput)
+  async GetBettingHistory(
+    @graphql.Args()
+    args: string
+  ): Promise<BettingHistoryOutput> {
+    return this.service.GetBettingHistory(args);
+  }
+
+  @graphql.Query(() => FinalLeaderboardOutput)
+  async GetFinalLeaderboard(
+    @graphql.Args()
+    args: string
+  ): Promise<FinalLeaderboardOutput> {
+    return this.service.GetFinalLeaderboard(args);
+  }
+
   @graphql.Mutation(() => PlaceBetInput)
   async PlaceBet(
     @graphql.Args()
     args: PlaceBetInput
   ): Promise<PlaceBetInput> {
     return this.service.PlaceBet(args);
+  }
+
+  @graphql.Mutation(() => String)
+  async SettleBets(
+    @graphql.Args()
+    args: BetSettlementInput
+  ): Promise<string> {
+    return this.service.SettleBets(args);
   }
 }

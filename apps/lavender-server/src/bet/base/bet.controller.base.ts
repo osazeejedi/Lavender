@@ -26,6 +26,9 @@ import { Bet } from "./Bet";
 import { BetFindManyArgs } from "./BetFindManyArgs";
 import { BetWhereUniqueInput } from "./BetWhereUniqueInput";
 import { BetUpdateInput } from "./BetUpdateInput";
+import { BetSettlementInput } from "../../user/BetSettlementInput";
+import { BettingHistoryOutput } from "../BettingHistoryOutput";
+import { FinalLeaderboardOutput } from "../FinalLeaderboardOutput";
 import { PlaceBetInput } from "../PlaceBetInput";
 
 @swagger.ApiBearerAuth()
@@ -287,6 +290,40 @@ export class BetControllerBase {
     }
   }
 
+  @common.Get("/bets/history")
+  @swagger.ApiOkResponse({
+    type: BettingHistoryOutput,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetBettingHistory(
+    @common.Body()
+    body: BetSettlementInput
+  ): Promise<BettingHistoryOutput> {
+    return this.service.GetBettingHistory(body);
+  }
+
+  @common.Get("/leaderboard/final")
+  @swagger.ApiOkResponse({
+    type: FinalLeaderboardOutput,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetFinalLeaderboard(
+    @common.Body()
+    body: BetSettlementInput
+  ): Promise<FinalLeaderboardOutput> {
+    return this.service.GetFinalLeaderboard(body);
+  }
+
   @common.Post("/bets/place")
   @swagger.ApiOkResponse({
     type: PlaceBetInput,
@@ -299,8 +336,25 @@ export class BetControllerBase {
   })
   async PlaceBet(
     @common.Body()
-    body: PlaceBetInput
+    body: BetSettlementInput
   ): Promise<PlaceBetInput> {
     return this.service.PlaceBet(body);
+  }
+
+  @common.Patch("/bets/settle")
+  @swagger.ApiOkResponse({
+    type: String,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async SettleBets(
+    @common.Body()
+    body: BetSettlementInput
+  ): Promise<string> {
+    return this.service.SettleBets(body);
   }
 }
