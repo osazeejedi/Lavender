@@ -30,6 +30,8 @@ import { BetFindManyArgs } from "../../bet/base/BetFindManyArgs";
 import { Bet } from "../../bet/base/Bet";
 import { BetWhereUniqueInput } from "../../bet/base/BetWhereUniqueInput";
 import { UploadProfilePictureInput } from "../UploadProfilePictureInput";
+import { UserProfileOutput } from "../UserProfileOutput";
+import { UserStatsOutput } from "../UserStatsOutput";
 import { LinkPaymentMethodInput } from "../LinkPaymentMethodInput";
 import { UserRegistrationInput } from "../UserRegistrationInput";
 import { SetPreferencesInput } from "../SetPreferencesInput";
@@ -362,6 +364,40 @@ export class UserControllerBase {
       data,
       select: { id: true },
     });
+  }
+
+  @common.Get("/users/profile")
+  @swagger.ApiOkResponse({
+    type: UserProfileOutput,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetUserProfile(
+    @common.Body()
+    body: UploadProfilePictureInput
+  ): Promise<UserProfileOutput> {
+    return this.service.GetUserProfile(body);
+  }
+
+  @common.Get("/users/stats")
+  @swagger.ApiOkResponse({
+    type: UserStatsOutput,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetUserStats(
+    @common.Body()
+    body: UploadProfilePictureInput
+  ): Promise<UserStatsOutput> {
+    return this.service.GetUserStats(body);
   }
 
   @common.Patch("/payment/methods/link")

@@ -28,6 +28,8 @@ import { UpdateUserArgs } from "./UpdateUserArgs";
 import { DeleteUserArgs } from "./DeleteUserArgs";
 import { BetFindManyArgs } from "../../bet/base/BetFindManyArgs";
 import { Bet } from "../../bet/base/Bet";
+import { UserProfileOutput } from "../UserProfileOutput";
+import { UserStatsOutput } from "../UserStatsOutput";
 import { LinkPaymentMethodInput } from "../LinkPaymentMethodInput";
 import { UserLoginInput } from "../UserLoginInput";
 import { UserRegistrationInput } from "../UserRegistrationInput";
@@ -158,6 +160,22 @@ export class UserResolverBase {
     }
 
     return results;
+  }
+
+  @graphql.Query(() => UserProfileOutput)
+  async GetUserProfile(
+    @graphql.Args()
+    args: string
+  ): Promise<UserProfileOutput> {
+    return this.service.GetUserProfile(args);
+  }
+
+  @graphql.Query(() => UserStatsOutput)
+  async GetUserStats(
+    @graphql.Args()
+    args: string
+  ): Promise<UserStatsOutput> {
+    return this.service.GetUserStats(args);
   }
 
   @graphql.Mutation(() => LinkPaymentMethodInput)

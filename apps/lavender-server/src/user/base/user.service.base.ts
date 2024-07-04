@@ -13,6 +13,8 @@ import { PrismaService } from "../../prisma/prisma.service";
 import { Prisma, User as PrismaUser, Bet as PrismaBet } from "@prisma/client";
 import { PasswordService } from "../../auth/password.service";
 import { transformStringFieldUpdateInput } from "../../prisma.util";
+import { UserProfileOutput } from "../UserProfileOutput";
+import { UserStatsOutput } from "../UserStatsOutput";
 import { LinkPaymentMethodInput } from "../LinkPaymentMethodInput";
 import { UserLoginInput } from "../UserLoginInput";
 import { UserRegistrationInput } from "../UserRegistrationInput";
@@ -75,6 +77,12 @@ export class UserServiceBase {
         where: { id: parentId },
       })
       .bets(args);
+  }
+  async GetUserProfile(args: string): Promise<UserProfileOutput> {
+    throw new Error("Not implemented");
+  }
+  async GetUserStats(args: string): Promise<UserStatsOutput> {
+    throw new Error("Not implemented");
   }
   async LinkPaymentMethod(
     args: LinkPaymentMethodInput
