@@ -29,6 +29,9 @@ import { UserUpdateInput } from "./UserUpdateInput";
 import { BetFindManyArgs } from "../../bet/base/BetFindManyArgs";
 import { Bet } from "../../bet/base/Bet";
 import { BetWhereUniqueInput } from "../../bet/base/BetWhereUniqueInput";
+import { UserAchievementFindManyArgs } from "../../userAchievement/base/UserAchievementFindManyArgs";
+import { UserAchievement } from "../../userAchievement/base/UserAchievement";
+import { UserAchievementWhereUniqueInput } from "../../userAchievement/base/UserAchievementWhereUniqueInput";
 import { UploadProfilePictureInput } from "../UploadProfilePictureInput";
 import { UserProfileOutput } from "../UserProfileOutput";
 import { UserStatsOutput } from "../UserStatsOutput";
@@ -272,6 +275,16 @@ export class UserControllerBase {
       ...query,
       select: {
         amount: true,
+
+        appUser: {
+          select: {
+            id: true,
+          },
+        },
+
+        betAmount: true,
+        bettingAppUser: true,
+        bettingRoom: true,
         createdAt: true,
         id: true,
         odds: true,
@@ -356,6 +369,130 @@ export class UserControllerBase {
   ): Promise<void> {
     const data = {
       bets: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/userAchievements")
+  @ApiNestedQuery(UserAchievementFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "UserAchievement",
+    action: "read",
+    possession: "any",
+  })
+  async findUserAchievements(
+    @common.Req() request: Request,
+    @common.Param() params: UserWhereUniqueInput
+  ): Promise<UserAchievement[]> {
+    const query = plainToClass(UserAchievementFindManyArgs, request.query);
+    const results = await this.service.findUserAchievements(params.id, {
+      ...query,
+      select: {
+        achievement: {
+          select: {
+            id: true,
+          },
+        },
+
+        achievementAppUser: true,
+        achievementDateEarned: true,
+
+        appUser: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        dateAchieved: true,
+        dateEarned: true,
+        id: true,
+        updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
+
+        userAchievement: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/userAchievements")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async connectUserAchievements(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: UserAchievementWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userAchievements: {
+        connect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/userAchievements")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async updateUserAchievements(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: UserAchievementWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userAchievements: {
+        set: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/userAchievements")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectUserAchievements(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: UserAchievementWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userAchievements: {
         disconnect: body,
       },
     };

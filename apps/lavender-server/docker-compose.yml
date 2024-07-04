@@ -17,7 +17,7 @@ services:
       KAFKA_CLIENT_ID: ${KAFKA_CLIENT_ID}
       KAFKA_GROUP_ID: ${KAFKA_GROUP_ID}
     depends_on:
-      - migrate
+      - redis
     restart: on-failure
   migrate:
     build:
@@ -85,5 +85,14 @@ services:
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
       KAFKA_CLUSTERS_0_JMXPORT: 9997
+  redis:
+    container_name: ${REDIS_HOST}
+    image: redis:7
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - redis:/data
 volumes:
   postgres: ~
+  redis:
+    driver: local

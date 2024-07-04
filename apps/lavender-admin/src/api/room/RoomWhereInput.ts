@@ -10,4 +10,7 @@ export type RoomWhereInput = {
   messages?: MessageListRelationFilter;
   name?: StringNullableFilter;
   owner?: StringNullableFilter;
+  roomDescription?: StringNullableFilter;
+  roomName?: StringNullableFilter;
+  roomOwner?: StringNullableFilter;
 };

@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Edit,
   SimpleForm,
@@ -6,7 +7,10 @@ import {
   NumberInput,
   ReferenceInput,
   SelectInput,
+  TextInput,
 } from "react-admin";
+
+import { AppUserTitle } from "../appUser/AppUserTitle";
 import { RoomTitle } from "../room/RoomTitle";
 import { UserTitle } from "../user/UserTitle";
 
@@ -15,6 +19,12 @@ export const BetEdit = (props: EditProps): React.ReactElement => {
     <Edit {...props}>
       <SimpleForm>
         <NumberInput label="amount" source="amount" />
+        <ReferenceInput source="appUser.id" reference="AppUser" label="AppUser">
+          <SelectInput optionText={AppUserTitle} />
+        </ReferenceInput>
+        <NumberInput label="betAmount" source="betAmount" />
+        <TextInput label="BettingAppUser" source="bettingAppUser" />
+        <TextInput label="BettingRoom" source="bettingRoom" />
         <NumberInput label="odds" source="odds" />
         <ReferenceInput source="room.id" reference="Room" label="room">
           <SelectInput optionText={RoomTitle} />

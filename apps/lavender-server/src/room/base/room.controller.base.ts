@@ -62,6 +62,9 @@ export class RoomControllerBase {
         id: true,
         name: true,
         owner: true,
+        roomDescription: true,
+        roomName: true,
+        roomOwner: true,
         updatedAt: true,
       },
     });
@@ -89,6 +92,9 @@ export class RoomControllerBase {
         id: true,
         name: true,
         owner: true,
+        roomDescription: true,
+        roomName: true,
+        roomOwner: true,
         updatedAt: true,
       },
     });
@@ -117,6 +123,9 @@ export class RoomControllerBase {
         id: true,
         name: true,
         owner: true,
+        roomDescription: true,
+        roomName: true,
+        roomOwner: true,
         updatedAt: true,
       },
     });
@@ -154,6 +163,9 @@ export class RoomControllerBase {
           id: true,
           name: true,
           owner: true,
+          roomDescription: true,
+          roomName: true,
+          roomOwner: true,
           updatedAt: true,
         },
       });
@@ -190,6 +202,9 @@ export class RoomControllerBase {
           id: true,
           name: true,
           owner: true,
+          roomDescription: true,
+          roomName: true,
+          roomOwner: true,
           updatedAt: true,
         },
       });
@@ -220,6 +235,16 @@ export class RoomControllerBase {
       ...query,
       select: {
         amount: true,
+
+        appUser: {
+          select: {
+            id: true,
+          },
+        },
+
+        betAmount: true,
+        bettingAppUser: true,
+        bettingRoom: true,
         createdAt: true,
         id: true,
         odds: true,
@@ -332,7 +357,17 @@ export class RoomControllerBase {
       select: {
         content: true,
         createdAt: true,
+
+        gameRoom: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
+        messageContent: true,
+        messageGameRoom: true,
+        messageSender: true,
 
         room: {
           select: {

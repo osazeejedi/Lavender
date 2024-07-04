@@ -14,6 +14,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested, IsEnum } from "class-validator";
+import { AppUserWhereUniqueInput } from "../../appUser/base/AppUserWhereUniqueInput";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { RoomWhereUniqueInput } from "../../room/base/RoomWhereUniqueInput";
 import { EnumBetStatus } from "./EnumBetStatus";
@@ -31,6 +33,51 @@ class BetWhereInput {
     nullable: true,
   })
   amount?: FloatNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => AppUserWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => AppUserWhereUniqueInput)
+  @IsOptional()
+  @Field(() => AppUserWhereUniqueInput, {
+    nullable: true,
+  })
+  appUser?: AppUserWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: FloatNullableFilter,
+  })
+  @Type(() => FloatNullableFilter)
+  @IsOptional()
+  @Field(() => FloatNullableFilter, {
+    nullable: true,
+  })
+  betAmount?: FloatNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  bettingAppUser?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  bettingRoom?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

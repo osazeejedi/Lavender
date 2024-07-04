@@ -35,6 +35,9 @@ export const RoomCreate = (props: CreateProps): React.ReactElement => {
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
         <TextInput label="owner" source="owner" />
+        <TextInput label="roomDescription" multiline source="roomDescription" />
+        <TextInput label="roomName" source="roomName" />
+        <TextInput label="roomOwner" source="roomOwner" />
       </SimpleForm>
     </Create>
   );

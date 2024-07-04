@@ -10,11 +10,14 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
+
 import {
   Prisma,
   Message as PrismaMessage,
+  GameRoom as PrismaGameRoom,
   Room as PrismaRoom,
 } from "@prisma/client";
+
 import { SendMessageInput } from "../SendMessageInput";
 
 export class MessageServiceBase {
@@ -40,6 +43,14 @@ export class MessageServiceBase {
   }
   async deleteMessage(args: Prisma.MessageDeleteArgs): Promise<PrismaMessage> {
     return this.prisma.message.delete(args);
+  }
+
+  async getGameRoom(parentId: string): Promise<PrismaGameRoom | null> {
+    return this.prisma.message
+      .findUnique({
+        where: { id: parentId },
+      })
+      .gameRoom();
   }
 
   async getRoom(parentId: string): Promise<PrismaRoom | null> {

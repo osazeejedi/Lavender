@@ -12,6 +12,7 @@ import {
 } from "react-admin";
 
 import { BetTitle } from "../bet/BetTitle";
+import { UserAchievementTitle } from "../userAchievement/UserAchievementTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
 
 export const UserEdit = (props: EditProps): React.ReactElement => {
@@ -43,6 +44,14 @@ export const UserEdit = (props: EditProps): React.ReactElement => {
           optionText="label"
           optionValue="value"
         />
+        <ReferenceArrayInput
+          source="userAchievements"
+          reference="UserAchievement"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={UserAchievementTitle} />
+        </ReferenceArrayInput>
         <TextInput label="Username" source="username" />
         <NumberInput label="walletBalance" source="walletBalance" />
       </SimpleForm>

@@ -4,10 +4,11 @@ import {
   Datagrid,
   ListProps,
   TextField,
-  DateField,
   ReferenceField,
+  DateField,
 } from "react-admin";
 import Pagination from "../Components/Pagination";
+import { APPUSER_TITLE_FIELD } from "../appUser/AppUserTitle";
 import { ROOM_TITLE_FIELD } from "../room/RoomTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
@@ -22,6 +23,12 @@ export const BetList = (props: ListProps): React.ReactElement => {
     >
       <Datagrid rowClick="show">
         <TextField label="amount" source="amount" />
+        <ReferenceField label="AppUser" source="appuser.id" reference="AppUser">
+          <TextField source={APPUSER_TITLE_FIELD} />
+        </ReferenceField>
+        <TextField label="betAmount" source="betAmount" />
+        <TextField label="BettingAppUser" source="bettingAppUser" />
+        <TextField label="BettingRoom" source="bettingRoom" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
         <TextField label="odds" source="odds" />

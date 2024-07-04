@@ -25,6 +25,7 @@ import { Type } from "class-transformer";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
+import { UserAchievementUpdateManyWithoutUsersInput } from "./UserAchievementUpdateManyWithoutUsersInput";
 
 @InputType()
 class UserUpdateInput {
@@ -173,6 +174,18 @@ class UserUpdateInput {
     nullable: true,
   })
   roles?: InputJsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: () => UserAchievementUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => UserAchievementUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => UserAchievementUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  userAchievements?: UserAchievementUpdateManyWithoutUsersInput;
 
   @ApiProperty({
     required: false,

@@ -54,6 +54,12 @@ export class BetControllerBase {
       data: {
         ...data,
 
+        appUser: data.appUser
+          ? {
+              connect: data.appUser,
+            }
+          : undefined,
+
         room: data.room
           ? {
               connect: data.room,
@@ -68,6 +74,16 @@ export class BetControllerBase {
       },
       select: {
         amount: true,
+
+        appUser: {
+          select: {
+            id: true,
+          },
+        },
+
+        betAmount: true,
+        bettingAppUser: true,
+        bettingRoom: true,
         createdAt: true,
         id: true,
         odds: true,
@@ -108,6 +124,16 @@ export class BetControllerBase {
       ...args,
       select: {
         amount: true,
+
+        appUser: {
+          select: {
+            id: true,
+          },
+        },
+
+        betAmount: true,
+        bettingAppUser: true,
+        bettingRoom: true,
         createdAt: true,
         id: true,
         odds: true,
@@ -147,6 +173,16 @@ export class BetControllerBase {
       where: params,
       select: {
         amount: true,
+
+        appUser: {
+          select: {
+            id: true,
+          },
+        },
+
+        betAmount: true,
+        bettingAppUser: true,
+        bettingRoom: true,
         createdAt: true,
         id: true,
         odds: true,
@@ -197,6 +233,12 @@ export class BetControllerBase {
         data: {
           ...data,
 
+          appUser: data.appUser
+            ? {
+                connect: data.appUser,
+              }
+            : undefined,
+
           room: data.room
             ? {
                 connect: data.room,
@@ -211,6 +253,16 @@ export class BetControllerBase {
         },
         select: {
           amount: true,
+
+          appUser: {
+            select: {
+              id: true,
+            },
+          },
+
+          betAmount: true,
+          bettingAppUser: true,
+          bettingRoom: true,
           createdAt: true,
           id: true,
           odds: true,
@@ -260,6 +312,16 @@ export class BetControllerBase {
         where: params,
         select: {
           amount: true,
+
+          appUser: {
+            select: {
+              id: true,
+            },
+          },
+
+          betAmount: true,
+          bettingAppUser: true,
+          bettingRoom: true,
           createdAt: true,
           id: true,
           odds: true,

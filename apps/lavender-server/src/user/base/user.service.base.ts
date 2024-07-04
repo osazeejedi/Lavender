@@ -10,7 +10,14 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, User as PrismaUser, Bet as PrismaBet } from "@prisma/client";
+
+import {
+  Prisma,
+  User as PrismaUser,
+  Bet as PrismaBet,
+  UserAchievement as PrismaUserAchievement,
+} from "@prisma/client";
+
 import { PasswordService } from "../../auth/password.service";
 import { transformStringFieldUpdateInput } from "../../prisma.util";
 import { UserProfileOutput } from "../UserProfileOutput";
@@ -25,6 +32,7 @@ import { UploadProfilePictureInput } from "../UploadProfilePictureInput";
 export class UserServiceBase {
   constructor(
     protected readonly prisma: PrismaService,
+    protected readonly passwordService: PasswordService,
     protected readonly passwordService: PasswordService
   ) {}
 
@@ -77,6 +85,17 @@ export class UserServiceBase {
         where: { id: parentId },
       })
       .bets(args);
+  }
+
+  async findUserAchievements(
+    parentId: string,
+    args: Prisma.UserAchievementFindManyArgs
+  ): Promise<PrismaUserAchievement[]> {
+    return this.prisma.user
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .userAchievements(args);
   }
   async GetUserProfile(args: string): Promise<UserProfileOutput> {
     throw new Error("Not implemented");

@@ -18,8 +18,9 @@ import {
   ValidateNested,
   IsDate,
 } from "class-validator";
-import { RoomWhereUniqueInput } from "../../room/base/RoomWhereUniqueInput";
+import { GameRoomWhereUniqueInput } from "../../gameRoom/base/GameRoomWhereUniqueInput";
 import { Type } from "class-transformer";
+import { RoomWhereUniqueInput } from "../../room/base/RoomWhereUniqueInput";
 
 @InputType()
 class MessageCreateInput {
@@ -34,6 +35,54 @@ class MessageCreateInput {
     nullable: true,
   })
   content?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => GameRoomWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => GameRoomWhereUniqueInput)
+  @IsOptional()
+  @Field(() => GameRoomWhereUniqueInput, {
+    nullable: true,
+  })
+  gameRoom?: GameRoomWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  messageContent?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  messageGameRoom?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  messageSender?: string | null;
 
   @ApiProperty({
     required: false,

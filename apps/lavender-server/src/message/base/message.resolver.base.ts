@@ -26,6 +26,7 @@ import { MessageFindUniqueArgs } from "./MessageFindUniqueArgs";
 import { CreateMessageArgs } from "./CreateMessageArgs";
 import { UpdateMessageArgs } from "./UpdateMessageArgs";
 import { DeleteMessageArgs } from "./DeleteMessageArgs";
+import { GameRoom } from "../../gameRoom/base/GameRoom";
 import { Room } from "../../room/base/Room";
 import { SendMessageInput } from "../SendMessageInput";
 import { MessageService } from "../message.service";
@@ -97,6 +98,12 @@ export class MessageResolverBase {
       data: {
         ...args.data,
 
+        gameRoom: args.data.gameRoom
+          ? {
+              connect: args.data.gameRoom,
+            }
+          : undefined,
+
         room: args.data.room
           ? {
               connect: args.data.room,
@@ -121,6 +128,12 @@ export class MessageResolverBase {
         ...args,
         data: {
           ...args.data,
+
+          gameRoom: args.data.gameRoom
+            ? {
+                connect: args.data.gameRoom,
+              }
+            : undefined,
 
           room: args.data.room
             ? {
@@ -158,6 +171,27 @@ export class MessageResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => GameRoom, {
+    nullable: true,
+    name: "gameRoom",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "GameRoom",
+    action: "read",
+    possession: "any",
+  })
+  async getGameRoom(
+    @graphql.Parent() parent: Message
+  ): Promise<GameRoom | null> {
+    const result = await this.service.getGameRoom(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

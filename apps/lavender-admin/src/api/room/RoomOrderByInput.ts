@@ -6,5 +6,8 @@ export type RoomOrderByInput = {
   id?: SortOrder;
   name?: SortOrder;
   owner?: SortOrder;
+  roomDescription?: SortOrder;
+  roomName?: SortOrder;
+  roomOwner?: SortOrder;
   updatedAt?: SortOrder;
 };

@@ -8,6 +8,7 @@ import {
   ReferenceField,
 } from "react-admin";
 import Pagination from "../Components/Pagination";
+import { GAMEROOM_TITLE_FIELD } from "../gameRoom/GameRoomTitle";
 import { ROOM_TITLE_FIELD } from "../room/RoomTitle";
 
 export const MessageList = (props: ListProps): React.ReactElement => {
@@ -22,7 +23,17 @@ export const MessageList = (props: ListProps): React.ReactElement => {
       <Datagrid rowClick="show">
         <TextField label="content" source="content" />
         <DateField source="createdAt" label="Created At" />
+        <ReferenceField
+          label="GameRoom"
+          source="gameroom.id"
+          reference="GameRoom"
+        >
+          <TextField source={GAMEROOM_TITLE_FIELD} />
+        </ReferenceField>
         <TextField label="ID" source="id" />
+        <TextField label="messageContent" source="messageContent" />
+        <TextField label="messageGameRoom" source="messageGameRoom" />
+        <TextField label="messageSender" source="messageSender" />
         <ReferenceField label="room" source="room.id" reference="Room">
           <TextField source={ROOM_TITLE_FIELD} />
         </ReferenceField>

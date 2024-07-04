@@ -10,12 +10,15 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
+
 import {
   Prisma,
   Bet as PrismaBet,
+  AppUser as PrismaAppUser,
   Room as PrismaRoom,
   User as PrismaUser,
 } from "@prisma/client";
+
 import { BettingHistoryOutput } from "../BettingHistoryOutput";
 import { FinalLeaderboardOutput } from "../FinalLeaderboardOutput";
 import { PlaceBetInput } from "../PlaceBetInput";
@@ -42,6 +45,14 @@ export class BetServiceBase {
   }
   async deleteBet(args: Prisma.BetDeleteArgs): Promise<PrismaBet> {
     return this.prisma.bet.delete(args);
+  }
+
+  async getAppUser(parentId: string): Promise<PrismaAppUser | null> {
+    return this.prisma.bet
+      .findUnique({
+        where: { id: parentId },
+      })
+      .appUser();
   }
 
   async getRoom(parentId: string): Promise<PrismaRoom | null> {

@@ -9,5 +9,8 @@ export type Room = {
   messages?: Array<Message>;
   name: string | null;
   owner: string | null;
+  roomDescription: string | null;
+  roomName: string | null;
+  roomOwner: string | null;
   updatedAt: Date;
 };

@@ -7,4 +7,7 @@ export type RoomCreateInput = {
   messages?: MessageCreateNestedManyWithoutRoomsInput;
   name?: string | null;
   owner?: string | null;
+  roomDescription?: string | null;
+  roomName?: string | null;
+  roomOwner?: string | null;
 };

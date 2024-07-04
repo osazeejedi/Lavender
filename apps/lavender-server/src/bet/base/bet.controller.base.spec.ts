@@ -19,6 +19,9 @@ const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
   amount: 42.42,
+  betAmount: 42.42,
+  bettingAppUser: "exampleBettingAppUser",
+  bettingRoom: "exampleBettingRoom",
   createdAt: new Date(),
   id: "exampleId",
   odds: 42.42,
@@ -26,6 +29,9 @@ const CREATE_INPUT = {
 };
 const CREATE_RESULT = {
   amount: 42.42,
+  betAmount: 42.42,
+  bettingAppUser: "exampleBettingAppUser",
+  bettingRoom: "exampleBettingRoom",
   createdAt: new Date(),
   id: "exampleId",
   odds: 42.42,
@@ -34,6 +40,9 @@ const CREATE_RESULT = {
 const FIND_MANY_RESULT = [
   {
     amount: 42.42,
+    betAmount: 42.42,
+    bettingAppUser: "exampleBettingAppUser",
+    bettingRoom: "exampleBettingRoom",
     createdAt: new Date(),
     id: "exampleId",
     odds: 42.42,
@@ -42,6 +51,9 @@ const FIND_MANY_RESULT = [
 ];
 const FIND_ONE_RESULT = {
   amount: 42.42,
+  betAmount: 42.42,
+  bettingAppUser: "exampleBettingAppUser",
+  bettingRoom: "exampleBettingRoom",
   createdAt: new Date(),
   id: "exampleId",
   odds: 42.42,

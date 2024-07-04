@@ -28,6 +28,8 @@ import { UpdateUserArgs } from "./UpdateUserArgs";
 import { DeleteUserArgs } from "./DeleteUserArgs";
 import { BetFindManyArgs } from "../../bet/base/BetFindManyArgs";
 import { Bet } from "../../bet/base/Bet";
+import { UserAchievementFindManyArgs } from "../../userAchievement/base/UserAchievementFindManyArgs";
+import { UserAchievement } from "../../userAchievement/base/UserAchievement";
 import { UserProfileOutput } from "../UserProfileOutput";
 import { UserStatsOutput } from "../UserStatsOutput";
 import { LinkPaymentMethodInput } from "../LinkPaymentMethodInput";
@@ -154,6 +156,26 @@ export class UserResolverBase {
     @graphql.Args() args: BetFindManyArgs
   ): Promise<Bet[]> {
     const results = await this.service.findBets(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [UserAchievement], { name: "userAchievements" })
+  @nestAccessControl.UseRoles({
+    resource: "UserAchievement",
+    action: "read",
+    possession: "any",
+  })
+  async findUserAchievements(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: UserAchievementFindManyArgs
+  ): Promise<UserAchievement[]> {
+    const results = await this.service.findUserAchievements(parent.id, args);
 
     if (!results) {
       return [];

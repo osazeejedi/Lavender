@@ -26,6 +26,7 @@ import { BetFindUniqueArgs } from "./BetFindUniqueArgs";
 import { CreateBetArgs } from "./CreateBetArgs";
 import { UpdateBetArgs } from "./UpdateBetArgs";
 import { DeleteBetArgs } from "./DeleteBetArgs";
+import { AppUser } from "../../appUser/base/AppUser";
 import { Room } from "../../room/base/Room";
 import { User } from "../../user/base/User";
 import { BettingHistoryOutput } from "../BettingHistoryOutput";
@@ -95,6 +96,12 @@ export class BetResolverBase {
       data: {
         ...args.data,
 
+        appUser: args.data.appUser
+          ? {
+              connect: args.data.appUser,
+            }
+          : undefined,
+
         room: args.data.room
           ? {
               connect: args.data.room,
@@ -123,6 +130,12 @@ export class BetResolverBase {
         ...args,
         data: {
           ...args.data,
+
+          appUser: args.data.appUser
+            ? {
+                connect: args.data.appUser,
+              }
+            : undefined,
 
           room: args.data.room
             ? {
@@ -164,6 +177,25 @@ export class BetResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => AppUser, {
+    nullable: true,
+    name: "appUser",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "AppUser",
+    action: "read",
+    possession: "any",
+  })
+  async getAppUser(@graphql.Parent() parent: Bet): Promise<AppUser | null> {
+    const result = await this.service.getAppUser(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

@@ -53,6 +53,12 @@ export class MessageControllerBase {
       data: {
         ...data,
 
+        gameRoom: data.gameRoom
+          ? {
+              connect: data.gameRoom,
+            }
+          : undefined,
+
         room: data.room
           ? {
               connect: data.room,
@@ -62,7 +68,17 @@ export class MessageControllerBase {
       select: {
         content: true,
         createdAt: true,
+
+        gameRoom: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
+        messageContent: true,
+        messageGameRoom: true,
+        messageSender: true,
 
         room: {
           select: {
@@ -96,7 +112,17 @@ export class MessageControllerBase {
       select: {
         content: true,
         createdAt: true,
+
+        gameRoom: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
+        messageContent: true,
+        messageGameRoom: true,
+        messageSender: true,
 
         room: {
           select: {
@@ -131,7 +157,17 @@ export class MessageControllerBase {
       select: {
         content: true,
         createdAt: true,
+
+        gameRoom: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
+        messageContent: true,
+        messageGameRoom: true,
+        messageSender: true,
 
         room: {
           select: {
@@ -174,6 +210,12 @@ export class MessageControllerBase {
         data: {
           ...data,
 
+          gameRoom: data.gameRoom
+            ? {
+                connect: data.gameRoom,
+              }
+            : undefined,
+
           room: data.room
             ? {
                 connect: data.room,
@@ -183,7 +225,17 @@ export class MessageControllerBase {
         select: {
           content: true,
           createdAt: true,
+
+          gameRoom: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
+          messageContent: true,
+          messageGameRoom: true,
+          messageSender: true,
 
           room: {
             select: {
@@ -226,7 +278,17 @@ export class MessageControllerBase {
         select: {
           content: true,
           createdAt: true,
+
+          gameRoom: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
+          messageContent: true,
+          messageGameRoom: true,
+          messageSender: true,
 
           room: {
             select: {

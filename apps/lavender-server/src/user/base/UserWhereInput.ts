@@ -17,6 +17,7 @@ import { Type } from "class-transformer";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
+import { UserAchievementListRelationFilter } from "../../userAchievement/base/UserAchievementListRelationFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 
 @InputType()
@@ -153,6 +154,18 @@ class UserWhereInput {
     nullable: true,
   })
   profilePicture?: JsonFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => UserAchievementListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => UserAchievementListRelationFilter)
+  @IsOptional()
+  @Field(() => UserAchievementListRelationFilter, {
+    nullable: true,
+  })
+  userAchievements?: UserAchievementListRelationFilter;
 
   @ApiProperty({
     required: false,

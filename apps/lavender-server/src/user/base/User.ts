@@ -28,6 +28,7 @@ import { Type } from "class-transformer";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
+import { UserAchievement } from "../../userAchievement/base/UserAchievement";
 
 @ObjectType()
 class User {
@@ -183,6 +184,15 @@ class User {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => [UserAchievement],
+  })
+  @ValidateNested()
+  @Type(() => UserAchievement)
+  @IsOptional()
+  userAchievements?: Array<UserAchievement>;
 
   @ApiProperty({
     required: true,

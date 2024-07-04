@@ -4,9 +4,10 @@ import {
   SimpleShowLayout,
   ShowProps,
   TextField,
-  DateField,
   ReferenceField,
+  DateField,
 } from "react-admin";
+import { APPUSER_TITLE_FIELD } from "../appUser/AppUserTitle";
 import { ROOM_TITLE_FIELD } from "../room/RoomTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
@@ -15,6 +16,12 @@ export const BetShow = (props: ShowProps): React.ReactElement => {
     <Show {...props}>
       <SimpleShowLayout>
         <TextField label="amount" source="amount" />
+        <ReferenceField label="AppUser" source="appuser.id" reference="AppUser">
+          <TextField source={APPUSER_TITLE_FIELD} />
+        </ReferenceField>
+        <TextField label="betAmount" source="betAmount" />
+        <TextField label="BettingAppUser" source="bettingAppUser" />
+        <TextField label="BettingRoom" source="bettingRoom" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
         <TextField label="odds" source="odds" />

@@ -23,6 +23,9 @@ const CREATE_INPUT = {
   id: "exampleId",
   name: "exampleName",
   owner: "exampleOwner",
+  roomDescription: "exampleRoomDescription",
+  roomName: "exampleRoomName",
+  roomOwner: "exampleRoomOwner",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
@@ -31,6 +34,9 @@ const CREATE_RESULT = {
   id: "exampleId",
   name: "exampleName",
   owner: "exampleOwner",
+  roomDescription: "exampleRoomDescription",
+  roomName: "exampleRoomName",
+  roomOwner: "exampleRoomOwner",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
@@ -40,6 +46,9 @@ const FIND_MANY_RESULT = [
     id: "exampleId",
     name: "exampleName",
     owner: "exampleOwner",
+    roomDescription: "exampleRoomDescription",
+    roomName: "exampleRoomName",
+    roomOwner: "exampleRoomOwner",
     updatedAt: new Date(),
   },
 ];
@@ -49,6 +58,9 @@ const FIND_ONE_RESULT = {
   id: "exampleId",
   name: "exampleName",
   owner: "exampleOwner",
+  roomDescription: "exampleRoomDescription",
+  roomName: "exampleRoomName",
+  roomOwner: "exampleRoomOwner",
   updatedAt: new Date(),
 };
 

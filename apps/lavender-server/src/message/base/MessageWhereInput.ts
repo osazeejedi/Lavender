@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
+import { GameRoomWhereUniqueInput } from "../../gameRoom/base/GameRoomWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { RoomWhereUniqueInput } from "../../room/base/RoomWhereUniqueInput";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
@@ -33,6 +34,18 @@ class MessageWhereInput {
 
   @ApiProperty({
     required: false,
+    type: () => GameRoomWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => GameRoomWhereUniqueInput)
+  @IsOptional()
+  @Field(() => GameRoomWhereUniqueInput, {
+    nullable: true,
+  })
+  gameRoom?: GameRoomWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -41,6 +54,39 @@ class MessageWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  messageContent?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  messageGameRoom?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  messageSender?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

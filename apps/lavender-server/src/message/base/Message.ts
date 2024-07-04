@@ -19,6 +19,7 @@ import {
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { GameRoom } from "../../gameRoom/base/GameRoom";
 import { Room } from "../../room/base/Room";
 
 @ObjectType()
@@ -44,12 +45,57 @@ class Message {
   createdAt!: Date;
 
   @ApiProperty({
+    required: false,
+    type: () => GameRoom,
+  })
+  @ValidateNested()
+  @Type(() => GameRoom)
+  @IsOptional()
+  gameRoom?: GameRoom | null;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   id!: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  messageContent!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  messageGameRoom!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  messageSender!: string | null;
 
   @ApiProperty({
     required: false,
