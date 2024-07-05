@@ -23,7 +23,9 @@ const CREATE_INPUT = {
   gameRoomDescription: "exampleGameRoomDescription",
   gameRoomName: "exampleGameRoomName",
   id: "exampleId",
+  matchSelection: "exampleMatchSelection",
   name: "exampleName",
+  roomType: "exampleRoomType",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
@@ -32,7 +34,9 @@ const CREATE_RESULT = {
   gameRoomDescription: "exampleGameRoomDescription",
   gameRoomName: "exampleGameRoomName",
   id: "exampleId",
+  matchSelection: "exampleMatchSelection",
   name: "exampleName",
+  roomType: "exampleRoomType",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
@@ -42,7 +46,9 @@ const FIND_MANY_RESULT = [
     gameRoomDescription: "exampleGameRoomDescription",
     gameRoomName: "exampleGameRoomName",
     id: "exampleId",
+    matchSelection: "exampleMatchSelection",
     name: "exampleName",
+    roomType: "exampleRoomType",
     updatedAt: new Date(),
   },
 ];
@@ -52,7 +58,9 @@ const FIND_ONE_RESULT = {
   gameRoomDescription: "exampleGameRoomDescription",
   gameRoomName: "exampleGameRoomName",
   id: "exampleId",
+  matchSelection: "exampleMatchSelection",
   name: "exampleName",
+  roomType: "exampleRoomType",
   updatedAt: new Date(),
 };
 

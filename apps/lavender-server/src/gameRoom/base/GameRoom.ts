@@ -11,18 +11,31 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { IsJSONValue } from "../../validators";
 import {
+  IsOptional,
   IsDate,
   IsString,
   MaxLength,
-  IsOptional,
   ValidateNested,
 } from "class-validator";
+import { GraphQLJSON } from "graphql-type-json";
+import { JsonValue } from "type-fest";
 import { Type } from "class-transformer";
 import { Message } from "../../message/base/Message";
 
 @ObjectType()
 class GameRoom {
+  @ApiProperty({
+    required: false,
+  })
+  @IsJSONValue()
+  @IsOptional()
+  @Field(() => GraphQLJSON, {
+    nullable: true,
+  })
+  betTypes!: JsonValue;
+
   @ApiProperty({
     required: true,
   })
@@ -77,6 +90,18 @@ class GameRoom {
 
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  matchSelection!: string | null;
+
+  @ApiProperty({
+    required: false,
     type: () => [Message],
   })
   @ValidateNested()
@@ -95,6 +120,18 @@ class GameRoom {
     nullable: true,
   })
   name!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  roomType!: string | null;
 
   @ApiProperty({
     required: true,

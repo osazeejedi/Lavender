@@ -142,13 +142,16 @@ model Clan {
 }
 
 model GameRoom {
+  betTypes            Json?
   createdAt           DateTime  @default(now())
   description         String?
   gameRoomDescription String?
   gameRoomName        String?
   id                  String    @id @default(cuid())
+  matchSelection      String?
   messages            Message[]
   name                String?
+  roomType            String?
   updatedAt           DateTime  @updatedAt
 }
 

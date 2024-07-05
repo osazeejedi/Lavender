@@ -28,6 +28,17 @@ class GameRoomOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  betTypes?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   createdAt?: SortOrder;
 
   @ApiProperty({
@@ -83,7 +94,29 @@ class GameRoomOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  matchSelection?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   name?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  roomType?: SortOrder;
 
   @ApiProperty({
     required: false,

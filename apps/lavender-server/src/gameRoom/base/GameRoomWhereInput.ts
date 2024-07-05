@@ -11,14 +11,26 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { JsonFilter } from "../../util/JsonFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { MessageListRelationFilter } from "../../message/base/MessageListRelationFilter";
 
 @InputType()
 class GameRoomWhereInput {
+  @ApiProperty({
+    required: false,
+    type: JsonFilter,
+  })
+  @Type(() => JsonFilter)
+  @IsOptional()
+  @Field(() => JsonFilter, {
+    nullable: true,
+  })
+  betTypes?: JsonFilter;
+
   @ApiProperty({
     required: false,
     type: StringNullableFilter,
@@ -65,6 +77,17 @@ class GameRoomWhereInput {
 
   @ApiProperty({
     required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  matchSelection?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
     type: () => MessageListRelationFilter,
   })
   @ValidateNested()
@@ -85,6 +108,17 @@ class GameRoomWhereInput {
     nullable: true,
   })
   name?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  roomType?: StringNullableFilter;
 }
 
 export { GameRoomWhereInput as GameRoomWhereInput };

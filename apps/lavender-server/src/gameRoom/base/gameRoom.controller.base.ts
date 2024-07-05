@@ -54,12 +54,15 @@ export class GameRoomControllerBase {
     return await this.service.createGameRoom({
       data: data,
       select: {
+        betTypes: true,
         createdAt: true,
         description: true,
         gameRoomDescription: true,
         gameRoomName: true,
         id: true,
+        matchSelection: true,
         name: true,
+        roomType: true,
         updatedAt: true,
       },
     });
@@ -82,12 +85,15 @@ export class GameRoomControllerBase {
     return this.service.gameRooms({
       ...args,
       select: {
+        betTypes: true,
         createdAt: true,
         description: true,
         gameRoomDescription: true,
         gameRoomName: true,
         id: true,
+        matchSelection: true,
         name: true,
+        roomType: true,
         updatedAt: true,
       },
     });
@@ -111,12 +117,15 @@ export class GameRoomControllerBase {
     const result = await this.service.gameRoom({
       where: params,
       select: {
+        betTypes: true,
         createdAt: true,
         description: true,
         gameRoomDescription: true,
         gameRoomName: true,
         id: true,
+        matchSelection: true,
         name: true,
+        roomType: true,
         updatedAt: true,
       },
     });
@@ -149,12 +158,15 @@ export class GameRoomControllerBase {
         where: params,
         data: data,
         select: {
+          betTypes: true,
           createdAt: true,
           description: true,
           gameRoomDescription: true,
           gameRoomName: true,
           id: true,
+          matchSelection: true,
           name: true,
+          roomType: true,
           updatedAt: true,
         },
       });
@@ -186,12 +198,15 @@ export class GameRoomControllerBase {
       return await this.service.deleteGameRoom({
         where: params,
         select: {
+          betTypes: true,
           createdAt: true,
           description: true,
           gameRoomDescription: true,
           gameRoomName: true,
           id: true,
+          matchSelection: true,
           name: true,
+          roomType: true,
           updatedAt: true,
         },
       });

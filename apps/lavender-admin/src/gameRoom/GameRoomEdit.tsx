@@ -15,6 +15,7 @@ export const GameRoomEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <div />
         <TextInput label="description" multiline source="description" />
         <TextInput
           label="gameRoomDescription"
@@ -22,6 +23,7 @@ export const GameRoomEdit = (props: EditProps): React.ReactElement => {
           source="gameRoomDescription"
         />
         <TextInput label="gameRoomName" source="gameRoomName" />
+        <TextInput label="matchSelection" multiline source="matchSelection" />
         <ReferenceArrayInput
           source="messages"
           reference="Message"
@@ -31,6 +33,7 @@ export const GameRoomEdit = (props: EditProps): React.ReactElement => {
           <SelectArrayInput optionText={MessageTitle} />
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
+        <TextInput label="roomType" source="roomType" />
       </SimpleForm>
     </Edit>
   );

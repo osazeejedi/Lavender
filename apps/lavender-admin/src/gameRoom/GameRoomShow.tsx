@@ -4,8 +4,8 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
-  DateField,
   TextField,
+  DateField,
   ReferenceManyField,
   Datagrid,
   ReferenceField,
@@ -18,12 +18,15 @@ export const GameRoomShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
+        <TextField label="betTypes" source="betTypes" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="description" source="description" />
         <TextField label="gameRoomDescription" source="gameRoomDescription" />
         <TextField label="gameRoomName" source="gameRoomName" />
         <TextField label="ID" source="id" />
+        <TextField label="matchSelection" source="matchSelection" />
         <TextField label="name" source="name" />
+        <TextField label="roomType" source="roomType" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
           reference="Message"

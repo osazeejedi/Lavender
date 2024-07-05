@@ -11,17 +11,30 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { IsJSONValue } from "../../validators";
 import {
+  IsOptional,
   IsString,
   MaxLength,
-  IsOptional,
   ValidateNested,
 } from "class-validator";
+import { GraphQLJSON } from "graphql-type-json";
+import { InputJsonValue } from "../../types";
 import { MessageCreateNestedManyWithoutGameRoomsInput } from "./MessageCreateNestedManyWithoutGameRoomsInput";
 import { Type } from "class-transformer";
 
 @InputType()
 class GameRoomCreateInput {
+  @ApiProperty({
+    required: false,
+  })
+  @IsJSONValue()
+  @IsOptional()
+  @Field(() => GraphQLJSON, {
+    nullable: true,
+  })
+  betTypes?: InputJsonValue;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -60,6 +73,18 @@ class GameRoomCreateInput {
 
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  matchSelection?: string | null;
+
+  @ApiProperty({
+    required: false,
     type: () => MessageCreateNestedManyWithoutGameRoomsInput,
   })
   @ValidateNested()
@@ -81,6 +106,18 @@ class GameRoomCreateInput {
     nullable: true,
   })
   name?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  roomType?: string | null;
 }
 
 export { GameRoomCreateInput as GameRoomCreateInput };
