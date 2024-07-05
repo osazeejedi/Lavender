@@ -25,6 +25,8 @@ import { Type } from "class-transformer";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
+import { SupportRequestCreateNestedManyWithoutUsersInput } from "./SupportRequestCreateNestedManyWithoutUsersInput";
+import { UserAccountCreateNestedManyWithoutUsersInput } from "./UserAccountCreateNestedManyWithoutUsersInput";
 import { UserAchievementCreateNestedManyWithoutUsersInput } from "./UserAchievementCreateNestedManyWithoutUsersInput";
 
 @InputType()
@@ -168,6 +170,30 @@ class UserCreateInput {
   @IsJSONValue()
   @Field(() => GraphQLJSON)
   roles!: InputJsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: () => SupportRequestCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => SupportRequestCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => SupportRequestCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  supportRequests?: SupportRequestCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => UserAccountCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => UserAccountCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => UserAccountCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  userAccounts?: UserAccountCreateNestedManyWithoutUsersInput;
 
   @ApiProperty({
     required: false,

@@ -12,6 +12,9 @@ import { NotificationModule } from "./notification/notification.module";
 import { ClanModule } from "./clan/clan.module";
 import { GameRoomModule } from "./gameRoom/gameRoom.module";
 import { AppUserModule } from "./appUser/appUser.module";
+import { UserAccountModule } from "./userAccount/userAccount.module";
+import { TransactionModule } from "./transaction/transaction.module";
+import { SupportRequestModule } from "./supportRequest/supportRequest.module";
 import { GameRoomApIsModule } from "./GameRoomApIs/gameroomapis.module";
 import { WebSocketModuleModule } from "./WebSocketModule/websocketmodule.module";
 import { HealthModule } from "./health/health.module";
@@ -44,6 +47,9 @@ import { AuthModule } from "./auth/auth.module";
     ClanModule,
     GameRoomModule,
     AppUserModule,
+    UserAccountModule,
+    TransactionModule,
+    SupportRequestModule,
     GameRoomApIsModule,
     WebSocketModuleModule,
     HealthModule,

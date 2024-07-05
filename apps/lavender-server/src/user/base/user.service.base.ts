@@ -15,6 +15,8 @@ import {
   Prisma,
   User as PrismaUser,
   Bet as PrismaBet,
+  SupportRequest as PrismaSupportRequest,
+  UserAccount as PrismaUserAccount,
   UserAchievement as PrismaUserAchievement,
 } from "@prisma/client";
 
@@ -85,6 +87,28 @@ export class UserServiceBase {
         where: { id: parentId },
       })
       .bets(args);
+  }
+
+  async findSupportRequests(
+    parentId: string,
+    args: Prisma.SupportRequestFindManyArgs
+  ): Promise<PrismaSupportRequest[]> {
+    return this.prisma.user
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .supportRequests(args);
+  }
+
+  async findUserAccounts(
+    parentId: string,
+    args: Prisma.UserAccountFindManyArgs
+  ): Promise<PrismaUserAccount[]> {
+    return this.prisma.user
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .userAccounts(args);
   }
 
   async findUserAchievements(

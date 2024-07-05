@@ -1,5 +1,7 @@
 import { Bet } from "../bet/Bet";
 import { JsonValue } from "type-fest";
+import { SupportRequest } from "../supportRequest/SupportRequest";
+import { UserAccount } from "../userAccount/UserAccount";
 import { UserAchievement } from "../userAchievement/UserAchievement";
 
 export type User = {
@@ -17,7 +19,9 @@ export type User = {
   privacySettings: JsonValue;
   profilePicture: JsonValue;
   roles: JsonValue;
+  supportRequests?: Array<SupportRequest>;
   updatedAt: Date;
+  userAccounts?: Array<UserAccount>;
   userAchievements?: Array<UserAchievement>;
   username: string;
   walletBalance: number | null;

@@ -12,6 +12,8 @@ import {
 } from "react-admin";
 
 import { BetTitle } from "../bet/BetTitle";
+import { SupportRequestTitle } from "../supportRequest/SupportRequestTitle";
+import { UserAccountTitle } from "../userAccount/UserAccountTitle";
 import { UserAchievementTitle } from "../userAchievement/UserAchievementTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
 
@@ -44,6 +46,22 @@ export const UserEdit = (props: EditProps): React.ReactElement => {
           optionText="label"
           optionValue="value"
         />
+        <ReferenceArrayInput
+          source="supportRequests"
+          reference="SupportRequest"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={SupportRequestTitle} />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput
+          source="userAccounts"
+          reference="UserAccount"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={UserAccountTitle} />
+        </ReferenceArrayInput>
         <ReferenceArrayInput
           source="userAchievements"
           reference="UserAchievement"

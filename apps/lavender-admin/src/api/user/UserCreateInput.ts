@@ -1,5 +1,7 @@
 import { BetCreateNestedManyWithoutUsersInput } from "./BetCreateNestedManyWithoutUsersInput";
 import { InputJsonValue } from "../../types";
+import { SupportRequestCreateNestedManyWithoutUsersInput } from "./SupportRequestCreateNestedManyWithoutUsersInput";
+import { UserAccountCreateNestedManyWithoutUsersInput } from "./UserAccountCreateNestedManyWithoutUsersInput";
 import { UserAchievementCreateNestedManyWithoutUsersInput } from "./UserAchievementCreateNestedManyWithoutUsersInput";
 
 export type UserCreateInput = {
@@ -16,6 +18,8 @@ export type UserCreateInput = {
   privacySettings?: InputJsonValue;
   profilePicture?: InputJsonValue;
   roles: InputJsonValue;
+  supportRequests?: SupportRequestCreateNestedManyWithoutUsersInput;
+  userAccounts?: UserAccountCreateNestedManyWithoutUsersInput;
   userAchievements?: UserAchievementCreateNestedManyWithoutUsersInput;
   username: string;
   walletBalance?: number | null;

@@ -28,6 +28,10 @@ import { UpdateUserArgs } from "./UpdateUserArgs";
 import { DeleteUserArgs } from "./DeleteUserArgs";
 import { BetFindManyArgs } from "../../bet/base/BetFindManyArgs";
 import { Bet } from "../../bet/base/Bet";
+import { SupportRequestFindManyArgs } from "../../supportRequest/base/SupportRequestFindManyArgs";
+import { SupportRequest } from "../../supportRequest/base/SupportRequest";
+import { UserAccountFindManyArgs } from "../../userAccount/base/UserAccountFindManyArgs";
+import { UserAccount } from "../../userAccount/base/UserAccount";
 import { UserAchievementFindManyArgs } from "../../userAchievement/base/UserAchievementFindManyArgs";
 import { UserAchievement } from "../../userAchievement/base/UserAchievement";
 import { UserProfileOutput } from "../UserProfileOutput";
@@ -156,6 +160,46 @@ export class UserResolverBase {
     @graphql.Args() args: BetFindManyArgs
   ): Promise<Bet[]> {
     const results = await this.service.findBets(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [SupportRequest], { name: "supportRequests" })
+  @nestAccessControl.UseRoles({
+    resource: "SupportRequest",
+    action: "read",
+    possession: "any",
+  })
+  async findSupportRequests(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: SupportRequestFindManyArgs
+  ): Promise<SupportRequest[]> {
+    const results = await this.service.findSupportRequests(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [UserAccount], { name: "userAccounts" })
+  @nestAccessControl.UseRoles({
+    resource: "UserAccount",
+    action: "read",
+    possession: "any",
+  })
+  async findUserAccounts(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: UserAccountFindManyArgs
+  ): Promise<UserAccount[]> {
+    const results = await this.service.findUserAccounts(parent.id, args);
 
     if (!results) {
       return [];

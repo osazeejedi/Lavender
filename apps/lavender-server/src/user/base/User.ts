@@ -28,6 +28,8 @@ import { Type } from "class-transformer";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
+import { SupportRequest } from "../../supportRequest/base/SupportRequest";
+import { UserAccount } from "../../userAccount/base/UserAccount";
 import { UserAchievement } from "../../userAchievement/base/UserAchievement";
 
 @ObjectType()
@@ -178,12 +180,30 @@ class User {
   roles!: JsonValue;
 
   @ApiProperty({
+    required: false,
+    type: () => [SupportRequest],
+  })
+  @ValidateNested()
+  @Type(() => SupportRequest)
+  @IsOptional()
+  supportRequests?: Array<SupportRequest>;
+
+  @ApiProperty({
     required: true,
   })
   @IsDate()
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => [UserAccount],
+  })
+  @ValidateNested()
+  @Type(() => UserAccount)
+  @IsOptional()
+  userAccounts?: Array<UserAccount>;
 
   @ApiProperty({
     required: false,

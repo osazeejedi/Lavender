@@ -29,6 +29,12 @@ import { UserUpdateInput } from "./UserUpdateInput";
 import { BetFindManyArgs } from "../../bet/base/BetFindManyArgs";
 import { Bet } from "../../bet/base/Bet";
 import { BetWhereUniqueInput } from "../../bet/base/BetWhereUniqueInput";
+import { SupportRequestFindManyArgs } from "../../supportRequest/base/SupportRequestFindManyArgs";
+import { SupportRequest } from "../../supportRequest/base/SupportRequest";
+import { SupportRequestWhereUniqueInput } from "../../supportRequest/base/SupportRequestWhereUniqueInput";
+import { UserAccountFindManyArgs } from "../../userAccount/base/UserAccountFindManyArgs";
+import { UserAccount } from "../../userAccount/base/UserAccount";
+import { UserAccountWhereUniqueInput } from "../../userAccount/base/UserAccountWhereUniqueInput";
 import { UserAchievementFindManyArgs } from "../../userAchievement/base/UserAchievementFindManyArgs";
 import { UserAchievement } from "../../userAchievement/base/UserAchievement";
 import { UserAchievementWhereUniqueInput } from "../../userAchievement/base/UserAchievementWhereUniqueInput";
@@ -369,6 +375,211 @@ export class UserControllerBase {
   ): Promise<void> {
     const data = {
       bets: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/supportRequests")
+  @ApiNestedQuery(SupportRequestFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "SupportRequest",
+    action: "read",
+    possession: "any",
+  })
+  async findSupportRequests(
+    @common.Req() request: Request,
+    @common.Param() params: UserWhereUniqueInput
+  ): Promise<SupportRequest[]> {
+    const query = plainToClass(SupportRequestFindManyArgs, request.query);
+    const results = await this.service.findSupportRequests(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        id: true,
+        message: true,
+        status: true,
+        updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/supportRequests")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async connectSupportRequests(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: SupportRequestWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      supportRequests: {
+        connect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/supportRequests")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async updateSupportRequests(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: SupportRequestWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      supportRequests: {
+        set: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/supportRequests")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectSupportRequests(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: SupportRequestWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      supportRequests: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/userAccounts")
+  @ApiNestedQuery(UserAccountFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "UserAccount",
+    action: "read",
+    possession: "any",
+  })
+  async findUserAccounts(
+    @common.Req() request: Request,
+    @common.Param() params: UserWhereUniqueInput
+  ): Promise<UserAccount[]> {
+    const query = plainToClass(UserAccountFindManyArgs, request.query);
+    const results = await this.service.findUserAccounts(params.id, {
+      ...query,
+      select: {
+        balance: true,
+        createdAt: true,
+        id: true,
+        updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/userAccounts")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async connectUserAccounts(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: UserAccountWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userAccounts: {
+        connect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/userAccounts")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async updateUserAccounts(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: UserAccountWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userAccounts: {
+        set: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/userAccounts")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectUserAccounts(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: UserAccountWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userAccounts: {
         disconnect: body,
       },
     };

@@ -1,5 +1,7 @@
 import { BetUpdateManyWithoutUsersInput } from "./BetUpdateManyWithoutUsersInput";
 import { InputJsonValue } from "../../types";
+import { SupportRequestUpdateManyWithoutUsersInput } from "./SupportRequestUpdateManyWithoutUsersInput";
+import { UserAccountUpdateManyWithoutUsersInput } from "./UserAccountUpdateManyWithoutUsersInput";
 import { UserAchievementUpdateManyWithoutUsersInput } from "./UserAchievementUpdateManyWithoutUsersInput";
 
 export type UserUpdateInput = {
@@ -16,6 +18,8 @@ export type UserUpdateInput = {
   privacySettings?: InputJsonValue;
   profilePicture?: InputJsonValue;
   roles?: InputJsonValue;
+  supportRequests?: SupportRequestUpdateManyWithoutUsersInput;
+  userAccounts?: UserAccountUpdateManyWithoutUsersInput;
   userAchievements?: UserAchievementUpdateManyWithoutUsersInput;
   username?: string;
   walletBalance?: number | null;

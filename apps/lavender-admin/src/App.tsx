@@ -49,6 +49,18 @@ import { AppUserList } from "./appUser/AppUserList";
 import { AppUserCreate } from "./appUser/AppUserCreate";
 import { AppUserEdit } from "./appUser/AppUserEdit";
 import { AppUserShow } from "./appUser/AppUserShow";
+import { UserAccountList } from "./userAccount/UserAccountList";
+import { UserAccountCreate } from "./userAccount/UserAccountCreate";
+import { UserAccountEdit } from "./userAccount/UserAccountEdit";
+import { UserAccountShow } from "./userAccount/UserAccountShow";
+import { TransactionList } from "./transaction/TransactionList";
+import { TransactionCreate } from "./transaction/TransactionCreate";
+import { TransactionEdit } from "./transaction/TransactionEdit";
+import { TransactionShow } from "./transaction/TransactionShow";
+import { SupportRequestList } from "./supportRequest/SupportRequestList";
+import { SupportRequestCreate } from "./supportRequest/SupportRequestCreate";
+import { SupportRequestEdit } from "./supportRequest/SupportRequestEdit";
+import { SupportRequestShow } from "./supportRequest/SupportRequestShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -151,6 +163,27 @@ const App = (): React.ReactElement => {
           edit={AppUserEdit}
           create={AppUserCreate}
           show={AppUserShow}
+        />
+        <Resource
+          name="UserAccount"
+          list={UserAccountList}
+          edit={UserAccountEdit}
+          create={UserAccountCreate}
+          show={UserAccountShow}
+        />
+        <Resource
+          name="Transaction"
+          list={TransactionList}
+          edit={TransactionEdit}
+          create={TransactionCreate}
+          show={TransactionShow}
+        />
+        <Resource
+          name="SupportRequest"
+          list={SupportRequestList}
+          edit={SupportRequestEdit}
+          create={SupportRequestCreate}
+          show={SupportRequestShow}
         />
       </Admin>
     </div>
